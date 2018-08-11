@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">闹钟</string>
+    <string name="action_settings">完成</string>
+    <string name="ap">上&#160;午</string>
+    <string name="am">下&#160;午</string>
+
+</resources>

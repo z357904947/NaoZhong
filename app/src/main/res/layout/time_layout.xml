@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bar_time"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <TextView
+        android:id="@+id/time_yyyymmdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:text="2018年"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/time_hour2" />
+
+    <ImageView
+        android:id="@+id/time_hour1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/time_hour2"
+        app:layout_constraintEnd_toStartOf="@+id/time_hour2"
+        app:layout_constraintStart_toEndOf="@+id/time_12"
+        app:layout_constraintTop_toTopOf="@+id/time_hour2"
+        app:srcCompat="@mipmap/num_2" />
+
+    <ImageView
+        android:id="@+id/time_minute1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/time_hour2"
+        app:layout_constraintEnd_toStartOf="@+id/time_minute2"
+        app:layout_constraintStart_toEndOf="@+id/time_colon"
+        app:layout_constraintTop_toTopOf="@+id/time_hour2"
+        app:srcCompat="@mipmap/num_0" />
+
+    <ImageView
+        android:id="@+id/time_colon"
+        android:layout_width="27dp"
+        android:layout_height="28dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/time_hour2"
+        app:layout_constraintEnd_toStartOf="@+id/time_minute1"
+        app:layout_constraintStart_toEndOf="@+id/time_hour2"
+        app:layout_constraintTop_toTopOf="@+id/time_hour2"
+        app:srcCompat="@mipmap/colon" />
+
+    <ImageView
+        android:id="@+id/time_hour2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/time_colon"
+        app:layout_constraintStart_toEndOf="@+id/time_hour1"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:srcCompat="@mipmap/num_0" />
+
+    <ImageView
+        android:id="@+id/time_minute2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/time_hour2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/time_minute1"
+        app:layout_constraintTop_toTopOf="@+id/time_hour2"
+        app:srcCompat="@mipmap/num_5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="64dp" />
+
+    <TextView
+        android:id="@+id/time_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="1"
+        android:text="shangwu"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/time_hour2"
+        app:layout_constraintEnd_toStartOf="@+id/time_hour1"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/time_hour2" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+

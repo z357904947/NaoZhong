@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/time_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Switch
+        android:id="@+id/list_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/list_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/list_clocktime" />
+
+    <TextView
+        android:id="@+id/list_clocktime"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="6：30"
+        android:textColor="@color/title_baise"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/list_note"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/list_shangxia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginTop="3dp"
+        android:text="下"
+        android:textColor="@color/title_baise"
+        app:layout_constraintEnd_toStartOf="@+id/list_clocktime"
+        app:layout_constraintTop_toTopOf="@+id/list_clocktime" />
+
+    <TextView
+        android:id="@+id/list_wu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="2dp"
+        android:text="午"
+        android:textColor="@color/title_baise"
+        app:layout_constraintBottom_toBottomOf="@+id/list_clocktime"
+        app:layout_constraintEnd_toStartOf="@+id/list_clocktime" />
+
+    <TextView
+        android:id="@+id/list_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="标签"
+        android:textColor="@color/title_baise"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/list_clocktime"
+        app:layout_constraintTop_toBottomOf="@+id/list_clocktime" />
+
+</android.support.constraint.ConstraintLayout>
