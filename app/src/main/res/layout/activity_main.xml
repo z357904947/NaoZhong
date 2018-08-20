@@ -14,10 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="?attr/actionBarSize"
-            app:contentScrim="?attr/colorPrimaryDark"
+            app:contentScrim="?attr/colorPrimary"
             app:titleEnabled="false"
-            app:title="周攀"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
             <include layout="@layout/time_layout"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"
@@ -26,6 +25,7 @@
               />
             <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_edit_black_24dp"
@@ -34,7 +34,6 @@
             app:contentInsetLeft="0dp"
             app:layout_collapseMode="pin"
             >
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,7 +42,6 @@
                     android:textAlignment="center"
                     android:textColor="@color/title_baise"
                     android:textSize="22sp" />
-
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -59,13 +57,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </LinearLayout>
-
+<!-- android:scaleType="center"将FloatingActionButton背景图最大,不起作用？-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:scaleType="center"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

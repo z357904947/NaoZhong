@@ -14,6 +14,7 @@ public class MySqlLitHelper extends SQLiteOpenHelper {
     public final static  String repeat="repeat";//重复的星期，格式为1，2，3，4，5，6，7（依次代表星期日-星期六 重复）
     public final static  String isalert="isalert";//代表是否稍后提醒，1=true代表是，0=false代表否。
     public final static  String ison="ison";//代表是否启用，1=true代表是，0=false代表否。
+    public final static  String clock_url="clock_url";//闹钟铃声url
     public MySqlLitHelper(Context context) {
         super(context, "naozhong.db", null, 1);
     }
@@ -21,19 +22,10 @@ public class MySqlLitHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String str ="CREATE TABLE "+MySqlLitHelper.table_name+"("+MySqlLitHelper.table_id+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ""+MySqlLitHelper.clock_time+" text,"+MySqlLitHelper.clock_note+" VARCHAR(10),"+MySqlLitHelper.repeat+" VARCHAR(20),"+MySqlLitHelper.isalert+" INTEGER ,"+MySqlLitHelper.ison+" INTEGER )";
+                ""+MySqlLitHelper.clock_time+" text,"+MySqlLitHelper.clock_note+" VARCHAR(10),"+MySqlLitHelper.repeat+" VARCHAR(20),"
+                +MySqlLitHelper.isalert+" INTEGER ,"+MySqlLitHelper.ison+" INTEGER ,"+MySqlLitHelper.clock_url+" text)";
         Log.d(LOG_TAG,str);
         db.execSQL(str);
-        //测试时初始化数据
-        db.execSQL("insert into " + MySqlLitHelper.table_name+ " ("+MySqlLitHelper.clock_time+", "+MySqlLitHelper.clock_note+", " +
-                ""+MySqlLitHelper.isalert+","+MySqlLitHelper.ison+") values (" +
-                "'18:33', '闹钟', 1,1)");
-        db.execSQL("insert into " + MySqlLitHelper.table_name+ " ("+MySqlLitHelper.clock_time+", "+MySqlLitHelper.clock_note+", " +
-                ""+MySqlLitHelper.isalert+","+MySqlLitHelper.ison+") values (" +
-                "'07:33', '闹钟', 1,0)");
-        db.execSQL("insert into " + MySqlLitHelper.table_name+ " ("+MySqlLitHelper.clock_time+", "+MySqlLitHelper.clock_note+", " +
-                ""+MySqlLitHelper.isalert+","+MySqlLitHelper.ison+") values (" +
-                "'12:33', '闹钟', 1,0)");
     }
 
     @Override

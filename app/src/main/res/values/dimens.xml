@@ -1,4 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="item">1dp</dimen>
+    <dimen name="paddingLeft">20dp</dimen>
+
 </resources>

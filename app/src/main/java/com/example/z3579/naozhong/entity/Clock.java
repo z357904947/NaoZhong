@@ -1,5 +1,7 @@
 package com.example.z3579.naozhong.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -9,29 +11,64 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clock {
+public class Clock implements Parcelable{
     private Integer id;//ID
     private Date clock_time;//闹钟时间
     private String clock_time_str;//闹钟时间，字符串类型
-    private String clock_note;//闹钟标签
+    private String clock_note="闹钟";//闹钟标签
     private String[] repeat;//该数组放置每周重复的星期
     private String clock_ring;//铃声
     private boolean isalert=false;//稍后提醒，true稍后提醒功能打开，false关闭
     private boolean ison=true;//当前闹钟是否启用，false关闭，true启用,数据库中1代表true，0代表false
     private static Map<String,String> map=new HashMap<String,String>();
     private final static String LOG_TAG="Clock_测试";
+
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");//用于得到当前年月日格式
     private static SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");//用于对年月日时分格式转换（HH24小时）
     //用于显示闹钟重复星期内容
     static {
-        map.put("1","周日");
-        map.put("2","周一");
-        map.put("3","周二");
-        map.put("4","周三");
-        map.put("5","周四");
-        map.put("6","周五");
-        map.put("7","周六");
+        map.put("1","周日 ");
+        map.put("2","周一 ");
+        map.put("3","周二 ");
+        map.put("4","周三 ");
+        map.put("5","周四 ");
+        map.put("6","周五 ");
+        map.put("7","周六 ");
     }
+    //得到小时
+    public int getHour(){
+
+        return  Integer.parseInt(clock_time_str.substring(0,clock_time_str.indexOf(":")));
+    }
+    //得到分钟
+    public int getMinute(){
+        return Integer.parseInt(clock_time_str.substring(clock_time_str.indexOf(":")+1));
+    }
+    protected Clock(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        clock_time_str = in.readString();
+        clock_note = in.readString();
+        repeat = in.createStringArray();
+        clock_ring = in.readString();
+        isalert = in.readByte() != 0;
+        ison = in.readByte() != 0;
+    }
+
+    public static final Creator<Clock> CREATOR = new Creator<Clock>() {
+        @Override
+        public Clock createFromParcel(Parcel in) {
+            return new Clock(in);
+        }
+
+        @Override
+        public Clock[] newArray(int size) {
+            return new Clock[size];
+        }
+    };
 
     /**
      * 返回闹钟时间是上午还是下午
@@ -50,10 +87,12 @@ public class Clock {
      * @return
      */
     public String get12time(){
-        Integer a =Integer.valueOf(clock_time_str.substring(0,2));
-        String b = clock_time_str.substring(2);
-        if(a>=12){
-            return (a-12)+b;
+        Integer a =getHour();
+        Integer b = getMinute();
+        if(a>12){
+            return (a-12)+":"+b;
+        }else if(a==0){
+            return (a+12)+":"+b;
         }
         return getClock_time_str_Delete0();
     }
@@ -106,11 +145,11 @@ public class Clock {
         return startTime;
 
     }
-    public  Clock(Integer id, String clock_time, String note, String repeat, Integer isalert,Integer ison){
+    public  Clock(Integer id, String clock_time, String note, String repeat, Integer isalert,Integer ison,String url){
         this.id=id;
         this.clock_time_str=clock_time;
         this.clock_note=note;
-        if(repeat!=null){
+        if(repeat!=null&&repeat.length()>0){
             this.repeat=repeat.split(",");
         }
         if(isalert==1){
@@ -120,7 +159,7 @@ public class Clock {
         }
          this.ison=ison==1?true:false;
 
-
+        this.clock_ring=url;
     }
 
     public String getClock_time_str() {
@@ -129,7 +168,7 @@ public class Clock {
 
     public String getClock_time_str_Delete0() {
         String a =clock_time_str;
-        if(clock_time_str.substring(0,1).equals("0")){//取掉时间格式开始的0
+        if(clock_time_str.substring(0,1).equals("0")&&!clock_time_str.substring(1,1).equals(":")){//取掉时间格式开始的0,条件为第一个字符为0，第二个字符不为冒号，防止0：54这种格式出错
             a=clock_time_str.substring(1);
         }
         return a;
@@ -140,16 +179,38 @@ public class Clock {
      * @return
      */
     public String repeattoString() {
-        StringBuffer str = new StringBuffer();
-        for (String s : repeat) {
-            str.append(s);
+        StringBuffer str = new StringBuffer("");
+        if(repeat!=null){
+            for (String s : repeat) {
+                str.append(map.get(s));
+            }
         }
         return str.toString();
     }
-
+    public String repeatSaveStr(){
+        StringBuffer str = new StringBuffer();
+        int i=1;
+        if(repeat!=null){
+            for (String s : repeat) {
+                if(i==1){
+                    str.append(s);
+                }else {
+                    str.append(",");
+                    str.append(s);
+                }
+                i++;
+            }
+        }
+        return str.toString();
+    }
     public Clock(){
 
     }
+
+    public void setClock_time_str(String clock_time_str) {
+        this.clock_time_str = clock_time_str;
+    }
+
     public void setClock_time(Date clock_time) {
         this.clock_time = clock_time;
     }
@@ -160,6 +221,25 @@ public class Clock {
 
     public void setRepeat(String[] repeat) {
         this.repeat = repeat;
+    }
+    public void setRepeat(boolean[]  repeat) {
+        StringBuffer str = new StringBuffer();
+        for (int i =0;i<repeat.length;i++){
+            if(repeat[i]){
+                if(str.length()==0){
+                    str.append(String.valueOf(i+1));
+                }else {
+                    str.append(","+String.valueOf(i+1));
+                }
+            }
+        }
+        Log.d("测试","重复："+str.toString());
+        if(str.length()==0){
+            this.repeat=null;
+        }else {
+            this.repeat=str.toString().split(",");
+        }
+
     }
 
     public void setClock_ring(String clock_ring) {
@@ -181,8 +261,10 @@ public class Clock {
     public String getClock_noteandrepeat() {
         String a  =clock_note;
         if(repeat!=null&&repeat.length>0){
+
             String str = repeattoString();
             a=clock_note+","+str;
+            Log.d("测试","重复："+str.toString());
         }
 
         return a;
@@ -198,5 +280,26 @@ public class Clock {
 
     public boolean isIsalert() {
         return isalert;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(clock_time_str);
+        dest.writeString(clock_note);
+        dest.writeStringArray(repeat);
+        dest.writeString(clock_ring);
+        dest.writeByte((byte) (isalert ? 1 : 0));
+        dest.writeByte((byte) (ison ? 1 : 0));
     }
 }

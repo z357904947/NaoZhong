@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.z3579.naozhong.dummy.DummyContent;
 import com.example.z3579.naozhong.dummy.DummyContent.DummyItem;
 import com.example.z3579.naozhong.entity.Clock;
+import com.example.z3579.naozhong.until.ClockDAO;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Clock_listFragment extends Fragment {
     //闹钟列表RecyclerView
     private RecyclerView clock_view;//闹钟显示列表
     //闹钟数据集合
-    private static List<Clock> list;
+    private  List<Clock> list;
     //闹钟列表适配器
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     private Context context;
@@ -37,7 +37,7 @@ public class Clock_listFragment extends Fragment {
     // TODO: Customize parameter argument names
     // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
-
+    private static Clock_listFragment fragment;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -46,21 +46,25 @@ public class Clock_listFragment extends Fragment {
     public Clock_listFragment() {
 
     }
+    /**
+     *数据库初始化，更新闹钟list
+     */
+    private void createSQL(){
+        //得到数据库中闹钟列表
+        list= ClockDAO.getInstance(getActivity()).getClockList();
+    }
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static Clock_listFragment newInstance(List<Clock> list) {
-      Clock_listFragment fragment = new Clock_listFragment();
-//      Bundle args = new Bundle();
-//
-//      fragment.setArguments(args);
-        Clock_listFragment.list=list;
+    public static Clock_listFragment newInstance( ) {
+      if(fragment==null){
+          fragment = new Clock_listFragment();
+      }
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 //        if (getArguments() != null) {
 //            falg12or24 = getArguments().getBoolean("falg12or24");
 //        }
@@ -86,12 +90,12 @@ public class Clock_listFragment extends Fragment {
      */
     private void init(){
         application = (MyApplication) getActivity().getApplication();
-
+        createSQL();
     }
     /**
      * 显示闹钟列表
      */
-    private void showClockList(){
+    public void showClockList(){
         if(list!=null){
             clock_view.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
             clock_view.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));

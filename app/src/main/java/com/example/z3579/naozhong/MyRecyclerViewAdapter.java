@@ -24,7 +24,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private boolean flag;//判断是否显示上下午,true 显示，false不显示
     private Context context;
     public MyRecyclerViewAdapter(List<Clock> list,boolean flag){
-
     this.list=list;
     this.flag=flag;
     }
