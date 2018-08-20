@@ -104,6 +104,13 @@ public class Clock_listFragment extends Fragment {
             clock_view.setAdapter(myRecyclerViewAdapter);
         }
     }
+
+    /**
+     * 当存储闹钟成功时，更新闹钟列表
+     */
+    public void addClock(Clock clock){
+        myRecyclerViewAdapter.addClock(list.size(),clock);
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

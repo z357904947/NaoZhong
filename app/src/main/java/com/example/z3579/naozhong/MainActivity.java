@@ -237,9 +237,9 @@ public class MainActivity extends AppCompatActivity implements Clock_listFragmen
         true12or24();
         //显示listFragment
         clock_listFragment = Clock_listFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.listfragment,clock_listFragment).addToBackStack("clock_listFragment").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.listfragment,clock_listFragment).commit();
 //        //显示列表
-//        showClockList();
+//      showClockList();
     }
 
     /**
@@ -346,8 +346,13 @@ public class MainActivity extends AppCompatActivity implements Clock_listFragmen
                 //将新的闹钟信息存入数据库
                 if(clock!=null){
                     clock.setClock_ring(ring.getUrlStr());
+                    //写入数据库
                     ClockDAO.getInstance(this).inserClock(clock);
-                    onBackPressed();//返回到闹钟列表
+                    //重新查询数据库得到最后一条数据，这里应该单独得到最后一条数据，
+                    List<Clock> list=ClockDAO.getInstance(this).getClockList();
+                    Clock c=ClockDAO.getInstance(this).getAddClock();
+                    clock_listFragment.addClock(c);
+                    onBackPressed();
                 }
                 return true;
             case android.R.id.home://Toolbar 左侧icn的ID
@@ -369,12 +374,12 @@ public class MainActivity extends AppCompatActivity implements Clock_listFragmen
         //得到回退栈的fragment个数
         int count =fragmentManager.getBackStackEntryCount();
         Log.d("测试","count:"+count);
-        if(count==3){
+        if(count==2){
             //显示存储
             setIsadd(false);
         }
         setIsadd(false);
-        if(count>=2){
+        if(count>=1){
             //得到栈顶的fragment
             FragmentManager.BackStackEntry  backStackEntry = fragmentManager.getBackStackEntryAt(count-1);
             String  tag= backStackEntry.getName();//得到该frangment标记
@@ -411,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements Clock_listFragmen
     }
     /**
      * 得到星期重复选中数据
-     * @param check
+     * @param check 选中状态数组
      */
     @Override
     public void onGetData(boolean[] check) {

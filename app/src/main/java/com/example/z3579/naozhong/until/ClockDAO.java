@@ -55,6 +55,30 @@ public class ClockDAO {
         db.close();
         return list;
     }
+    /**
+     *  得到新增的闹钟。
+     * @return 闹钟列表
+     */
+    public Clock getAddClock(){
+        SQLiteDatabase db = mySqlLitHelper.getWritableDatabase();
+        Cursor cursor =  db.rawQuery("select * from "+MySqlLitHelper.table_name,null);
+        Clock clock=null;
+        if (cursor.moveToLast()){
+                Integer id = cursor.getInt(cursor.getColumnIndex(MySqlLitHelper.table_id));
+                String clock_time = cursor.getString(cursor.getColumnIndex(MySqlLitHelper.clock_time));
+                String clock_note = cursor.getString(cursor.getColumnIndex(MySqlLitHelper.clock_note));
+                String repeat = cursor.getString(cursor.getColumnIndex(MySqlLitHelper.repeat));
+                Integer isalert = cursor.getInt(cursor.getColumnIndex(MySqlLitHelper.isalert));
+                Integer ison = cursor.getInt(cursor.getColumnIndex(MySqlLitHelper.ison));
+                String url= cursor.getString(cursor.getColumnIndex(MySqlLitHelper.clock_url));
+                Log.d(LOG_TAG,clock_time+clock_note+repeat+isalert+ison+url);
+                clock = new Clock(id,clock_time,clock_note,repeat,isalert,ison,url);
+
+        }
+        cursor.close();
+        db.close();
+        return clock;
+    }
 
     /**
      * 关闭或者启用闹钟

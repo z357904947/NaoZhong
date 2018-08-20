@@ -99,4 +99,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         }
     }
+
+    /**
+     *  实现新增闹钟是更新闹钟列表
+     * @param index
+     */
+    public void addClock(int index,Clock clock){
+        list.add(index,clock);
+        notifyItemInserted(index);
+    }
 }
