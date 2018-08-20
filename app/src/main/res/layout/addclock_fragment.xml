@@ -1,0 +1,173 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.z3579.naozhong.AddFragment">
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/textView_chongfu"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/selecter_textset"
+        android:gravity="center_vertical"
+        android:text="  重复"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wheelview" />
+
+    <TextView
+        android:id="@+id/textView_label"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/selecter_textset"
+        android:gravity="center_vertical"
+        android:text="  标签"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_chongfu" />
+
+    <TextView
+        android:id="@+id/textView_ring"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/selecter_textset"
+        android:gravity="center_vertical"
+        android:text="  铃声"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_label" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/selecter_textset"
+        android:gravity="center_vertical"
+        android:text="  稍后提醒"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ring" />
+
+    <TextView
+        android:id="@+id/textView_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView_label"
+        app:layout_constraintEnd_toEndOf="@+id/textView_chongfu"
+        app:layout_constraintTop_toTopOf="@+id/textView_chongfu" />
+
+    <TextView
+        android:id="@+id/textView_right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_label"
+        app:layout_constraintEnd_toEndOf="@+id/textView_label"
+        app:layout_constraintTop_toTopOf="@+id/textView_label" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/textView_ring"
+        app:layout_constraintTop_toTopOf="@+id/textView_ring" />
+
+    <Switch
+        android:id="@+id/switch_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <com.weigan.loopview.LoopView
+        android:id="@+id/wheelview"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:awv_textsize="18"
+        app:awv_centerTextColor="@color/title_baise"
+        app:awv_outerTextColor="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/wheelview_minute"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.weigan.loopview.LoopView
+        android:id="@+id/wheelview_minute"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:awv_textsize="18"
+        app:awv_centerTextColor="@color/title_baise"
+        app:awv_outerTextColor="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/wheelview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wheelview"
+        app:layout_constraintTop_toTopOf="@+id/wheelview" />
+
+    <TextView
+        android:id="@+id/set_lable1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView_label"
+        app:layout_constraintEnd_toStartOf="@+id/textView_right"
+        app:layout_constraintTop_toTopOf="@+id/textView_chongfu" />
+
+    <TextView
+        android:id="@+id/set_lable2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ring"
+        app:layout_constraintEnd_toStartOf="@+id/textView_right2"
+        app:layout_constraintTop_toTopOf="@+id/textView_label" />
+
+    <TextView
+        android:id="@+id/set_lable3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/clock_set_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView_ring" />
+
+</android.support.constraint.ConstraintLayout>
